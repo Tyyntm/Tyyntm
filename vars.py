@@ -9,7 +9,7 @@ pics = 'https://telegra.ph/file/313c4cc958238fd0d49a6.jpg'
 
 # admins, channels & users
 admins = '1584694165 5591503031 5688047190'
-channels = '' # file channel id use @IDFinder_Robot
+channels = '-1001816566628' # file channel id use @IDFinder_Robot
 
 auth_users = '' # private use (only for auth users)
 auth_group = '' # private use (only for seted chat)
@@ -21,7 +21,7 @@ database_name = 'Tyysontmefiles'
 # fsub
 auth_channel = ''
 req_channel = '-1001855582592'
-join_reqs_db = '' # database url or put this value database_uri
+join_reqs_db = 'mongodb+srv://Aa:Aa@cluster0.wxgjgbv.mongodb.net/?retryWrites=true&w=majority' # database url or put this value database_uri
 # eg
 # join_reqs_db = database_uri
 # join_reqs_db = 'mongodb+srv://Aa:Aa@cluster0.wxgjgbv.mongodb.net/?retryWrites=true&w=majority'
