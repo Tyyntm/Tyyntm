@@ -10,41 +10,50 @@ def is_enabled(value, default):
     else:
         return default
 
+from vars import (
+    api_id, api_hash, bot_token,
+    cache_time, pics,
+    admins, channels, auth_users, auth_group,
+    database_uri, database_name,
+    auth_channel, req_channel, join_reqs_db,
+    log_channel, support_chat
+)
+
 # Bot information
-SESSION = environ.get('SESSION', 'Media_search')
-API_ID = int(environ.get('API_ID', '6351429'))
-API_HASH = environ.get('API_HASH', '912c2bcd930fb7dd5bac711b8c4d4895') 
-BOT_TOKEN = environ.get('BOT_TOKEN', "5514962644:AAGLLbdUDDpHbUfdhnZEoBb8oVNEGOzy9sw") 
+SESSION = environ.get('SESSION', 'TelegramBot')
+API_ID = int(environ.get('API_ID', api_id))
+API_HASH = environ.get('API_HASH', api_hash) 
+BOT_TOKEN = environ.get('BOT_TOKEN', bot_token) 
 
 # Bot settings
-CACHE_TIME = int(environ.get('CACHE_TIME', 300))
+CACHE_TIME = int(environ.get('CACHE_TIME', cache_time))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', False))
-PICS = (environ.get('PICS', 'https://telegra.ph/file/b558eeb0c8c9ca0f59b57.jpg https://telegra.ph/file/4ea7a4777d6a08c7d7780.jpg https://telegra.ph/file/4788bc89f40705010f2ef.jpg https://telegra.ph/file/6244dc9cd682581d3ac8f.jpg https://telegra.ph/file/0eee2657101f76f36d45c.jpg ')).split()
+PICS = (environ.get('PICS', pics)).split()
 
 # Admins, Channels & Users
-ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '1584694165').split()]
-CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1001689360667 -1001541175468 -1001265602872').split()]
-auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
+ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', admins).split()]
+CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', channels).split()]
+auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', auth_users).split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
-auth_grp = environ.get('AUTH_GROUP')
+auth_grp = environ.get('AUTH_GROUP', auth_group)
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 
 # MongoDB information
-DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://jerry:bot@cluster0.qof3hys.mongodb.net/?retryWrites=true&w=majority")
-DATABASE_NAME = environ.get('DATABASE_NAME', "Cluster0")
+DATABASE_URI = environ.get('DATABASE_URI', database_uri)
+DATABASE_NAME = environ.get('DATABASE_NAME', database_name)
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 
 # FSUB
-auth_channel = environ.get('AUTH_CHANNEL', '')
+auth_channel = environ.get('AUTH_CHANNEL', auth_channel)
 AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_channel) else None
 # Set to False inside the bracket if you don't want to use Request Channel else set it to Channel ID
-REQ_CHANNEL = environ.get("REQ_CHANNEL", '-1001515520728')
+REQ_CHANNEL = environ.get("REQ_CHANNEL", req_channel)
 REQ_CHANNEL = int(REQ_CHANNEL) if REQ_CHANNEL and id_pattern.search(REQ_CHANNEL) else False
-JOIN_REQS_DB = environ.get("JOIN_REQS_DB", DATABASE_URI)
+JOIN_REQS_DB = environ.get("JOIN_REQS_DB", join_reqs_db)
 
 # Others
-LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1001179133650'))
-SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'TeamEvamaria')
+LOG_CHANNEL = int(environ.get('LOG_CHANNEL', log_channel))
+SUPPORT_CHAT = environ.get('SUPPORT_CHAT', support_chat)
 P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', "True")), False)
 IMDB = is_enabled((environ.get('IMDB', "False")), True)
 SINGLE_BUTTON = is_enabled((environ.get('SINGLE_BUTTON', "True")), False)
